@@ -18,7 +18,7 @@ export default function NavBar() {
   const currentPath = usePathname();
   // `text-gray-400 hover:text-gray-700 text-xl`
   return (
-    <nav className="flex space-x-8 h-10 items-center px-6 py-6 border-b-2">
+    <nav className="flex space-x-8 h-10 items-center px-6 py-6 border-b-2 mb-5">
       <Link href="/">
         <MdDashboard size={25} />
       </Link>
