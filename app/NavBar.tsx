@@ -5,13 +5,10 @@ import { MdDashboard } from "react-icons/md";
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
 import { styles } from "./styles/themes";
+import { NavLink } from "./types/types";
 
-type Link = {
-  name: string;
-  href: string;
-};
 export default function NavBar() {
-  const navLinks: Link[] = [
+  const navLinks: NavLink[] = [
     { name: "Dashboard", href: "/" },
     { name: "Issues", href: "/issues" },
   ];
