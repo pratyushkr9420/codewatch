@@ -5,6 +5,7 @@ import IssueTools from "../components/IssueTools";
 
 export default function LoadingIssuesPage() {
   const issues = [1, 1, 1, 1, 1];
+
   return (
     <div>
       <IssueTools />

@@ -1,14 +1,12 @@
 import prisma from "@/prisma/client";
-import { Button, Table } from "@radix-ui/themes";
-import Link from "next/link";
+import { Table } from "@radix-ui/themes";
 import React from "react";
 import IssueStatusBadge from "../components/IssueStatusBadge";
 import IssueTools from "../components/IssueTools";
-import delay from "delay";
+import LinkCustom from "../components/LinkCustom";
 
 export default async function Issues() {
   const issues = await prisma.issue.findMany();
-  await delay(5000);
   return (
     <div>
       <IssueTools />
@@ -28,7 +26,7 @@ export default async function Issues() {
           {issues.map((issue) => (
             <Table.Row key={issue.id}>
               <Table.Cell>
-                {issue.title}
+                <LinkCustom href={`/issues/${issue.id}`} title={issue.title} />
                 <div className="md:hidden">
                   <IssueStatusBadge status={issue.status} />
                 </div>
