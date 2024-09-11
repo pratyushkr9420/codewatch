@@ -5,9 +5,11 @@ import React from "react";
 
 export default function EditIssueButton({ issueId }: { issueId: number }) {
   return (
-    <Button>
-      <Pencil2Icon />
-      <Link href={`/issues/${issueId}/edit`}>Edit</Link>
+    <Button size="4">
+      <Link href={`/issues/edit/${issueId}`}>
+        <Pencil2Icon />
+      </Link>
+      <Link href={`/issues/edit/${issueId}`}>Edit</Link>
     </Button>
   );
 }

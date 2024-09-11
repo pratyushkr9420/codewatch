@@ -1,10 +1,8 @@
 import prisma from "@/prisma/client";
-import { Pencil2Icon } from "@radix-ui/react-icons";
-import { Box, Button, Grid } from "@radix-ui/themes";
-import Link from "next/link";
+import { Box, Grid } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
-import IssueDetails from "./IssueDetails";
 import EditIssueButton from "./EditIssueButton";
+import IssueDetails from "./IssueDetails";
 
 type Props = {
   params: {
