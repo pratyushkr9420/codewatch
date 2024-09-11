@@ -1,16 +1,15 @@
 "use client";
-import { Button, Callout, TextField } from "@radix-ui/themes";
-import SimpleMDE from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
-import React, { useState } from "react";
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
-import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
+import { ErrorMessage, Spinner } from "@/app/components";
 import { createIssueSchema } from "@/app/validationSchemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button, Callout, TextField } from "@radix-ui/themes";
+import axios from "axios";
+import "easymde/dist/easymde.min.css";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import SimpleMDE from "react-simplemde-editor";
 import { z } from "zod";
-import ErrorMessage from "@/app/components/ErrorMessage";
-import Spinner from "@/app/components/Spinner";
 
 type IssueForm = z.infer<typeof createIssueSchema>;
 
@@ -24,7 +23,7 @@ export default function NewIssuePage() {
   } = useForm<IssueForm>({
     resolver: zodResolver(createIssueSchema),
   });
-  const [error, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const onSubmit: SubmitHandler<IssueForm> = async (data) => {
     setIsSubmitting(true);
@@ -39,9 +38,9 @@ export default function NewIssuePage() {
   };
   return (
     <div className="max-w-2xl">
-      {error && (
+      {errorMessage && (
         <Callout.Root color="red" className="mb-5">
-          <Callout.Text>{error}</Callout.Text>
+          <Callout.Text>{errorMessage}</Callout.Text>
         </Callout.Root>
       )}
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
