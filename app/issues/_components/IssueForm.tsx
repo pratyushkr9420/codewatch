@@ -40,6 +40,7 @@ export default function IssueForm({ issue }: { issue?: Issue }) {
       }
       setIsSubmitting(false);
       router.push("/issues");
+      router.refresh();
     } catch (error) {
       setErrorMessage("unexpected error occured");
       setIsSubmitting(false);
