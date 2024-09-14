@@ -18,7 +18,6 @@ export default async function EditIssuePage({ params: { id } }: Props) {
       id: parseInt(id),
     },
   });
-  console.log(issue);
   if (!issue) notFound();
 
   return <IssueForm issue={issue} />;
