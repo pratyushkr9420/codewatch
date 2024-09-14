@@ -1,11 +1,5 @@
-import { LoadingLine } from "@/app/components";
-import { Box } from "@radix-ui/themes";
+import IssueFormLoadingSkeleton from "../_components/IssueFormLoadingSkeleton";
 
 export default function LoadingNewIssuePage() {
-  return (
-    <Box className="space-x-5">
-      <LoadingLine />
-      <LoadingLine />
-    </Box>
-  );
+  return <IssueFormLoadingSkeleton />;
 }
