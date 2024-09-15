@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import classNames from "classnames";
 import { styles } from "./styles/themes";
 import { NavLink } from "./types/types";
+import { useSession } from "next-auth/react";
+import { Box } from "@radix-ui/themes";
 
 export default function NavBar() {
   const navLinks: NavLink[] = [
@@ -13,7 +15,7 @@ export default function NavBar() {
     { name: "Issues", href: "/issues" },
   ];
   const currentPath = usePathname();
-  // `text-gray-400 hover:text-gray-700 text-xl`
+  const { data: session, status } = useSession();
   return (
     <nav className="flex space-x-8 h-10 items-center px-6 py-6 border-b-2 mb-5">
       <Link href="/">
@@ -33,6 +35,14 @@ export default function NavBar() {
           </li>
         ))}
       </ul>
+      <Box>
+        {status === "authenticated" && (
+          <Link href="/api/auth/signout">Logout</Link>
+        )}
+        {status === "unauthenticated" && (
+          <Link href="/api/auth/signin">Login</Link>
+        )}
+      </Box>
     </nav>
   );
 }
