@@ -1,20 +1,19 @@
 "use client";
-import Link from "next/link";
-import React from "react";
-import { MdDashboard } from "react-icons/md";
-import { usePathname } from "next/navigation";
-import classNames from "classnames";
-import { styles } from "./styles/themes";
-import { NavLink } from "./types/types";
-import { useSession } from "next-auth/react";
 import {
   Avatar,
   Box,
-  Button,
   DropdownMenu,
   Flex,
+  Skeleton,
   Text,
 } from "@radix-ui/themes";
+import classNames from "classnames";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { MdDashboard } from "react-icons/md";
+import { styles } from "./styles/themes";
+import { NavLink } from "./types/types";
 
 export default function NavBar() {
   const navLinks: NavLink[] = [
@@ -26,7 +25,7 @@ export default function NavBar() {
   return (
     <nav className="h-14 px-6 py-3 border-b-2 mb-5">
       <Flex direction="row" justify="between" align="center">
-        <Flex gap="2" align="center">
+        <Flex gap="4" align="center">
           <Link href="/">
             <MdDashboard size={25} />
           </Link>
@@ -46,6 +45,7 @@ export default function NavBar() {
           </ul>
         </Flex>
         <Box>
+          {status === "loading" && <Skeleton width="48px" />}
           {status === "authenticated" && (
             <DropdownMenu.Root>
               <DropdownMenu.Trigger>
@@ -70,7 +70,12 @@ export default function NavBar() {
             </DropdownMenu.Root>
           )}
           {status === "unauthenticated" && (
-            <Link href="/api/auth/signin">Login</Link>
+            <Link
+              className={`${styles.text.regularText} ${styles.text.hoverText} `}
+              href="/api/auth/signin"
+            >
+              Login
+            </Link>
           )}
         </Box>
       </Flex>
