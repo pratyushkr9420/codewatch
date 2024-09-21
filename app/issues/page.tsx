@@ -1,12 +1,13 @@
 import prisma from "@/prisma/client";
-import { Table } from "@radix-ui/themes";
+import { Box, Table } from "@radix-ui/themes";
 import React from "react";
-import { IssueStatusBadge, IssueTools, LinkCustom } from "../components";
+import { IssueStatusBadge, LinkCustom } from "../components";
+import IssueTools from "./_components/IssueTools";
 
 export default async function Issues() {
   const issues = await prisma.issue.findMany();
   return (
-    <div>
+    <Box>
       <IssueTools />
       <Table.Root variant="ghost">
         <Table.Header>
@@ -39,7 +40,7 @@ export default async function Issues() {
           ))}
         </Table.Body>
       </Table.Root>
-    </div>
+    </Box>
   );
 }
 

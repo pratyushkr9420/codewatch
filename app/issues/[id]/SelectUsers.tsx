@@ -4,7 +4,6 @@ import { Issue, User } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import React from "react";
 
 export default function SelectUsers({ issue }: { issue: Issue }) {
   const {
@@ -20,17 +19,20 @@ export default function SelectUsers({ issue }: { issue: Issue }) {
     staleTime: 1000 * 60,
     retry: 4,
   });
+
+  const assignUsers = (userId: string) => {
+    axios.patch(`/api/issues/${issue.id}`, {
+      developerId: userId !== "none" ? userId : null,
+    });
+  };
+
   if (isLoading) return LoadingLine;
 
   if (error) return <p>{error.message}</p>;
   return (
     <Select.Root
       defaultValue={issue.developerId || ""}
-      onValueChange={(userId) => {
-        axios.patch(`/api/issues/${issue.id}`, {
-          developerId: userId !== "none" ? userId : null,
-        });
-      }}
+      onValueChange={assignUsers}
     >
       <Select.Trigger placeholder="Assign user" />
       <Select.Content>
