@@ -1,6 +1,7 @@
 import { Table } from "@radix-ui/themes";
 import React from "react";
-import { LoadingLine, IssueTools } from "../components";
+import { LoadingLine } from "../components";
+import IssueTools from "./_components/IssueTools";
 
 export default function LoadingIssuesPage() {
   const issues = [1, 1, 1, 1, 1];

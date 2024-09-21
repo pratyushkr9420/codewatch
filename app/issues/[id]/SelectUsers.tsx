@@ -4,8 +4,10 @@ import { Issue, User } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function SelectUsers({ issue }: { issue: Issue }) {
+  const router = useRouter();
   const {
     data: users,
     error,
@@ -16,7 +18,7 @@ export default function SelectUsers({ issue }: { issue: Issue }) {
       const { data } = await axios.get<User[]>("/api/users");
       return data;
     },
-    staleTime: 1000 * 60,
+    staleTime: 1000 * 60 * 5,
     retry: 4,
   });
 
@@ -24,6 +26,7 @@ export default function SelectUsers({ issue }: { issue: Issue }) {
     axios.patch(`/api/issues/${issue.id}`, {
       developerId: userId !== "none" ? userId : null,
     });
+    router.refresh();
   };
 
   if (isLoading) return LoadingLine;
