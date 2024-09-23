@@ -17,7 +17,7 @@ export default function IssueStatusFilter() {
     const params = new URLSearchParams();
 
     if (status) {
-      params.set("status", status);
+      params.append("status", status);
     }
 
     if (params.get("orderBy")) {
