@@ -38,7 +38,11 @@ export default function IssuesSummary({ open, closed, inProgress }: Props) {
             >
               {card.label}
             </Link>
-            <Text size="6" className="font-bold">
+            <Text
+              size="6"
+              className="font-bold"
+              style={{ color: "var(--accent-10)" }}
+            >
               {card.value}
             </Text>
           </Flex>
