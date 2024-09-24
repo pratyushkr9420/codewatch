@@ -5,7 +5,7 @@ import IssueStatusFilter from "./IssueStatusFilter";
 
 export default function IssueTools() {
   return (
-    <Flex className="mb-5" justify="between">
+    <Flex justify="between">
       <IssueStatusFilter />
       <Button>
         <Link href="/issues/new">Add a Issue</Link>
