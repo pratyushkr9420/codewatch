@@ -1,6 +1,7 @@
 import prisma from "@/prisma/client";
-import IssuesSummary from "./components/IssuesSummary";
-import { LatestIssues } from "./components";
+// import IssuesSummary from "./components/IssuesSummary";
+// import { LatestIssues } from "./components";
+import IssuesCharts from "./components/IssuesCharts";
 
 export default async function Home() {
   const issues = await prisma.issue.findMany();
@@ -13,8 +14,7 @@ export default async function Home() {
   ).length;
   return (
     <>
-      <LatestIssues />
-      <IssuesSummary
+      <IssuesCharts
         open={openIssues}
         closed={closedIssues}
         inProgress={inProgressIssues}
