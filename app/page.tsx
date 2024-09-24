@@ -1,9 +1,24 @@
-import LatestIssues from "./components/LatestIssues";
+import prisma from "@/prisma/client";
+import IssuesSummary from "./components/IssuesSummary";
+import { LatestIssues } from "./components";
 
-export default function Home() {
+export default async function Home() {
+  const issues = await prisma.issue.findMany();
+  const openIssues = issues.filter((issue) => issue.status === "OPEN").length;
+  const closedIssues = issues.filter(
+    (issue) => issue.status === "CLOSED"
+  ).length;
+  const inProgressIssues = issues.filter(
+    (issue) => issue.status === "IN_PROGRESS"
+  ).length;
   return (
     <>
       <LatestIssues />
+      <IssuesSummary
+        open={openIssues}
+        closed={closedIssues}
+        inProgress={inProgressIssues}
+      />
     </>
   );
 }
