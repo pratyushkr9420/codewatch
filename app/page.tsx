@@ -7,6 +7,8 @@ import IssuesSummary from "./components/IssuesSummary";
 import { LatestIssues } from "./components";
 import { Metadata } from "next";
 
+// Logic that is applicable to this component but should not be declared in it
+
 export default async function Home() {
   const issues = await prisma.issue.findMany();
   const openIssues = issues.filter((issue) => issue.status === "OPEN").length;
