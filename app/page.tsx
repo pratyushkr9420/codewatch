@@ -5,6 +5,7 @@ import IssuesCharts from "./components/IssuesCharts";
 import { Flex, Grid } from "@radix-ui/themes";
 import IssuesSummary from "./components/IssuesSummary";
 import { LatestIssues } from "./components";
+import { Metadata } from "next";
 
 export default async function Home() {
   const issues = await prisma.issue.findMany();
@@ -33,3 +34,8 @@ export default async function Home() {
     </Grid>
   );
 }
+
+export const metadata: Metadata = {
+  title: "Codewatch - Dashboard",
+  description: "Shows the summary of all the issues in the project",
+};

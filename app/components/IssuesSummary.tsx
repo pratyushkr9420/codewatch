@@ -31,7 +31,7 @@ export default function IssuesSummary({ open, closed, inProgress }: Props) {
     <Flex gap="4">
       {cards.map((card) => (
         <Card key={card.value}>
-          <Flex direction="column">
+          <Flex direction="column" align="center">
             <Link
               className="text-lg font-medium"
               href={`/issues/?status=${card.status}`}

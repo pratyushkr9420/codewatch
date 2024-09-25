@@ -5,6 +5,7 @@ import Pagination from "../components/Pagination";
 import { IssuesQuery } from "../types/types";
 import IssuesTable, { tableColumnNames } from "./_components/IssuesTable";
 import IssueTools from "./_components/IssueTools";
+import { Metadata } from "next";
 
 type Props = {
   searchParams: IssuesQuery;
@@ -52,3 +53,8 @@ export default async function Issues({ searchParams }: Props) {
 }
 
 export const dynamic = "force  dynamic";
+
+export const metadata: Metadata = {
+  title: "Codewatch - Listed Issues ",
+  description: "Shows all the issues",
+};
