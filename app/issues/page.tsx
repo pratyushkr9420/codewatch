@@ -52,7 +52,7 @@ export default async function Issues({ searchParams }: Props) {
   );
 }
 
-export const dynamic = "force  dynamic";
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Codewatch - Listed Issues ",
