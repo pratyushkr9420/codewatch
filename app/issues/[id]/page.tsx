@@ -6,8 +6,8 @@ import { notFound } from "next/navigation";
 import DeleteIssueButton from "./DeleteIssueButton";
 import EditIssueButton from "./EditIssueButton";
 import IssueDetails from "./IssueDetails";
-import SelectUsers from "./SelectUsers";
 import { cache } from "react";
+import { SelectUsers } from "./SelectUsers";
 
 type Props = {
   params: {

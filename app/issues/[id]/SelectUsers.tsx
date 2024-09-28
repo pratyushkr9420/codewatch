@@ -1,4 +1,4 @@
-"use client";
+import React from "react";
 import { LoadingLine } from "@/app/components";
 import { Issue, User } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
@@ -6,7 +6,11 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-export default function SelectUsers({ issue }: { issue: Issue }) {
+interface SelectUsersProps {
+  issue: Issue;
+}
+
+export const SelectUsers: React.FC<SelectUsersProps> = ({ issue }) => {
   const router = useRouter();
   const {
     data: users,
@@ -29,9 +33,10 @@ export default function SelectUsers({ issue }: { issue: Issue }) {
     router.refresh();
   };
 
-  if (isLoading) return LoadingLine;
+  if (isLoading) return <LoadingLine />;
 
   if (error) return <p>{error.message}</p>;
+
   return (
     <Select.Root
       defaultValue={issue.developerId || ""}
@@ -51,4 +56,4 @@ export default function SelectUsers({ issue }: { issue: Issue }) {
       </Select.Content>
     </Select.Root>
   );
-}
+};
