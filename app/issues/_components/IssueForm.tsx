@@ -1,4 +1,4 @@
-"use client";
+import dynamic from "next/dynamic";
 import { ErrorMessage, Spinner } from "@/app/components";
 import { issueSchema } from "@/app/validationSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -9,8 +9,11 @@ import "easymde/dist/easymde.min.css";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import SimpleMDE from "react-simplemde-editor";
 import { z } from "zod";
+
+const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
+  ssr: false,
+});
 
 type IssueFormData = z.infer<typeof issueSchema>;
 
@@ -26,6 +29,7 @@ export default function IssueForm({ issue }: { issue?: Issue }) {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const onSubmit: SubmitHandler<IssueFormData> = async (data) => {
     setIsSubmitting(true);
     try {
@@ -38,10 +42,11 @@ export default function IssueForm({ issue }: { issue?: Issue }) {
       router.push("/issues");
       router.refresh();
     } catch (error) {
-      setErrorMessage("unexpected error occured");
+      setErrorMessage("unexpected error occurred");
       setIsSubmitting(false);
     }
   };
+
   return (
     <div className="max-w-2xl">
       {errorMessage && (
@@ -54,7 +59,7 @@ export default function IssueForm({ issue }: { issue?: Issue }) {
           defaultValue={issue?.title}
           placeholder="Title"
           {...register("title")}
-        ></TextField.Root>
+        />
         <ErrorMessage message={errors.title?.message} />
         <Controller
           control={control}
