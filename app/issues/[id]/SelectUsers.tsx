@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { LoadingLine } from "@/app/components";
 import { Issue, User } from "@prisma/client";
