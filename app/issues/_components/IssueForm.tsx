@@ -11,7 +11,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
-import { revalidatePath } from "next/cache";
 
 const SimpleMDE = dynamic(() => import("react-simplemde-editor"), {
   ssr: false,
@@ -43,8 +42,6 @@ export default function IssueForm({ issue }: { issue?: Issue }) {
       setIsSubmitting(false);
       router.push("/issues");
       router.refresh();
-      revalidatePath("/");
-      revalidatePath("/issues");
     } catch (error) {
       setErrorMessage("unexpected error occurred");
       setIsSubmitting(false);
