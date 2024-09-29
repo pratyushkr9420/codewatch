@@ -44,6 +44,7 @@ export default function IssueForm({ issue }: { issue?: Issue }) {
       router.push("/issues");
       router.refresh();
       revalidatePath("/");
+      revalidatePath("/issues");
     } catch (error) {
       setErrorMessage("unexpected error occurred");
       setIsSubmitting(false);
