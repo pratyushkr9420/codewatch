@@ -41,3 +41,5 @@ export const metadata: Metadata = {
   title: "Codewatch - Dashboard",
   description: "Shows the summary of all the issues in the project",
 };
+
+export const dynamic = "force-dynamic";
