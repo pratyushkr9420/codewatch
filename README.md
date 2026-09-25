@@ -1,36 +1,75 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Codewatch
 
-## Getting Started
+A production-grade issue tracker for engineering teams. Built to practice a modern Next.js 14 App Router stack end to end: typed forms, server-side data fetching, protected routes, and instrumented production error reporting.
 
-First, run the development server:
+**Repo:** https://github.com/pratyushkr9420/codewatch
+
+## What it does
+
+- **Issue lifecycle** — create, edit, delete issues with status (`OPEN`, `IN_PROGRESS`, `CLOSED`).
+- **Rich descriptions** — Markdown editor (SimpleMDE) with server-rendered Markdown preview.
+- **Assignment** — assign an issue to a specific developer from the authenticated user pool.
+- **Dashboard** — at-a-glance issue counts and status breakdown, rendered with Recharts.
+- **Authentication** — NextAuth with Google OAuth; sessions persisted through the Prisma adapter.
+- **Access control** — issue create/edit/delete routes are auth-gated at the middleware layer.
+- **Instrumented in production** — Sentry captures runtime errors across client, server, and edge.
+
+## Stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 14 (App Router) |
+| Language | TypeScript |
+| Database | MySQL via Prisma |
+| Auth | NextAuth + Prisma adapter (Google OAuth) |
+| UI | Radix UI + Tailwind CSS |
+| Forms | React Hook Form + Zod validation |
+| Data fetching | TanStack Query |
+| Markdown | react-simplemde-editor + react-markdown |
+| Charts | Recharts |
+| Error monitoring | Sentry (client, server, edge configs) |
+
+## Data model
+
+Four Prisma models — `Issue`, `User`, `Account`, `Session` — with issue-to-developer as a nullable one-to-many. Status is an enum (`OPEN`, `IN_PROGRESS`, `CLOSED`), and timestamps are auto-managed by Prisma.
+
+## Getting started
 
 ```bash
+git clone https://github.com/pratyushkr9420/codewatch.git
+cd codewatch
+npm install
+
+# Configure environment
+cp .env.sample .env
+# Fill in: DATABASE_URL, NEXTAUTH_SECRET, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET,
+#         NEXT_PUBLIC_SENTRY_DSN
+
+# Push schema to the database
+npx prisma migrate deploy
+
+# Run the dev server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project layout
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+app/
+  ├── api/            # Route handlers (NextAuth, issues CRUD)
+  ├── auth/           # Sign-in / sign-out flows
+  ├── issues/         # List, detail, new, edit pages
+  ├── components/     # Shared UI
+  └── validationSchemas.ts  # Zod schemas shared client + server
+prisma/
+  ├── schema.prisma
+  └── migrations/
+middleware.ts         # Route-level auth guards
+sentry.*.config.ts    # Error reporting boot for each runtime
+```
 
-## Learn More
+## Why it exists
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Codewatch is a study project — a personal reference implementation of a full-stack Next.js 14 App Router application with authentication, typed data access, form validation, and production instrumentation wired end-to-end. The scope is intentionally focused on the plumbing rather than the domain.
