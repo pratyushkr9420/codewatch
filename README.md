@@ -2,8 +2,6 @@
 
 A production-grade issue tracker for engineering teams. Built to practice a modern Next.js 14 App Router stack end to end: typed forms, server-side data fetching, protected routes, and instrumented production error reporting.
 
-**Repo:** https://github.com/pratyushkr9420/codewatch
-
 ## What it does
 
 - **Issue lifecycle** — create, edit, delete issues with status (`OPEN`, `IN_PROGRESS`, `CLOSED`).
